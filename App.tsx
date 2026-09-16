@@ -7,24 +7,20 @@ import { SafeAreaView, SafeAreaProvider } from 'react-native-safe-area-context';
 import { Button } from 'react-native';
 
 export default function App() {
-
   const [meals, setMeals] = useState<Meal[]>([]);
   const [ingredient, setIngredient] = useState("");
 
   const fetchMeals = () => {
-    console.log("Haku alkaa");
     fetch(`${process.env.EXPO_PUBLIC_API_URL}?i=${ingredient}`)
       .then(response => {
         if (!response.ok) {
           throw new Error("Something went wrong in fetch");
         }
-
         return response.json();
       })
       .then(data => setMeals(data.meals))
       .catch(err => console.error(err))
   }
-
 
   return (
     <SafeAreaProvider>
